@@ -1,3 +1,6 @@
+
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +10,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddGraphQLServer().AddQueryType<Query>();
+
 var app = builder.Build();
+
+app.MapGraphQL();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
